@@ -110,15 +110,9 @@ h1,h2,h3,h4,h5,p {
   }
 }
 
-@media screen and (max-width: 680px) {
-  .column-on-tablet {
-    flex-direction: column;
-  }
-}
-
 .vitruvian-container {
   position: fixed;
-  transform: translate3d(-50%,-55%,0);
+  transform: translate3d(-50%,-57%,0);
   left: 50%;
   top: 50%;
   width: 750px;
@@ -127,6 +121,18 @@ h1,h2,h3,h4,h5,p {
   align-items: center;
   justify-content: center;
   z-index: -1;
+}
+
+@media screen and (max-width: 680px) {
+  .column-on-tablet {
+    flex-direction: column;
+  }
+  .vitruvian-container {
+    width: 560px;
+  }
+  .navigation-link {
+    padding-right: 0rem;
+  }
 }
 
 
@@ -166,7 +172,7 @@ img.vitruvian-star {
   pointer-events: none;
 }
 
-[data-homepage-random-group].vitruvian-show {
+[data-homepage-random-group].-vitruvianshow {
   visibility: visible;
   filter: none;
   opacity: 1;
