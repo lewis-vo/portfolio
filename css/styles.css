@@ -118,6 +118,17 @@ h1,h2,h3,h4,h5,p {
   }
 }
 
+@media screen and (max-width: 480px) {
+  .homepage-main-section {
+    padding: 13px;
+    flex-direction: column;
+  }
+
+  :root {
+    --font-size: 13px;
+  }
+}
+
 .vitruvian-container {
   position: fixed;
   transform: translate3d(-50%,-57%,0);
