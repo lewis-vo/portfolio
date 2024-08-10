@@ -9,31 +9,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
 </head>
-<body>
+<body class="scrim">
   <main class="homepage-main-section hide-scroll">
-    <section class="row-section">
-      <div class="column flex-column">
-        <div class="logo-container" data-appear data-appear-delay="5" data-appear-clipped="true">
-          <img class="logo" src="./assets/logo1.svg" data-homepage-random-group="logos">
-          <img class="logo" src="./assets/logo2.svg" data-homepage-random-group="logos">
-          <img class="logo" src="./assets/logo3.svg" data-homepage-random-group="logos">
-          <img class="logo" src="./assets/logo4.svg" data-homepage-random-group="logos">
-          <img class="logo" src="./assets/logo5.svg" data-homepage-random-group="logos">
-          <img class="logo" src="./assets/logo6.svg" data-homepage-random-group="logos">
-        </div>
-        <p data-appear data-appear-delay="10">
-          HOME
-        </p>
-      </div>
-      <div class="flex-grow w-100"></div>
-      <nav class="column flex-column">
-        <a class="navigation-link" data-appear data-appear-delay="6" data-shuffle-on-hover>[ HOME ]</a>
-        <a class="navigation-link" data-appear data-appear-delay="8" data-shuffle-on-hover>[ PROJECTS ]</a>
-        <a class="navigation-link" data-appear data-appear-delay="10" data-shuffle-on-hover>[ ABOUT ]</a>
-      </nav>
-    </section>
-    <div class="flex-grow"></div>
-    <div class="vitruvian-container">
+    <div class="vitruvian-container" id="central">
       <img class="vitruvian-circle" src="./assets/vitruvian/circle.svg"
         data-appear
         data-appear-on-load="true"
@@ -103,6 +81,38 @@
       <img src="./assets/vitruvian/44.png" data-homepage-random-group="boards-2">
       <img src="./assets/vitruvian/45.png" data-homepage-random-group="boards-2">
     </div>
+
+    <section class="row-section">
+      <div class="column flex-column">
+        <div class="logo-container" data-appear data-appear-delay="5" data-appear-clipped="true">
+          <img class="logo" src="./assets/logo1.svg" data-homepage-random-group="logos">
+          <img class="logo" src="./assets/logo2.svg" data-homepage-random-group="logos">
+          <img class="logo" src="./assets/logo3.svg" data-homepage-random-group="logos">
+          <img class="logo" src="./assets/logo4.svg" data-homepage-random-group="logos">
+          <img class="logo" src="./assets/logo5.svg" data-homepage-random-group="logos">
+          <img class="logo" src="./assets/logo6.svg" data-homepage-random-group="logos">
+        </div>
+        <p data-appear data-appear-delay="10">
+          HOME
+        </p>
+      </div>
+      <div class="flex-grow w-100"></div>
+      <nav class="column flex-column">
+        <a class="navigation-link" data-appear data-appear-delay="6" data-shuffle-on-hover>[ HOME ]</a>
+        <a class="navigation-link" data-appear data-appear-delay="8" data-shuffle-on-hover>[ PROJECTS ]</a>
+        <a class="navigation-link" data-appear data-appear-delay="10" data-shuffle-on-hover>[ ABOUT ]</a>
+      </nav>
+    </section>
+
+    <section class="row-section h-100">
+      <div class="column flex-column">
+      </div>
+      <div class="column flex-column">
+      </div>
+      <div class="column flex-column">
+      </div>
+    </section>
+
     <section class="row-section column-on-tablet">
       <div class="column flex-column">
         <div class="flex-grow h-100"></div>
@@ -116,7 +126,7 @@
       <div class="flex-grow w-100"></div>
       <div class="column flex-column">
         <p data-appear data-appear-delay="8">
-          Hi, I'm Lewis. I'm a Design Studies student at RMIT Vietnam who seeks perfection through imperfection.
+          Hi, I'm Lewis. I'm a Design Studies student at RMIT Vietnam who strives to achieve perfect things through imperfect means.
         </p>
       </div>
     </section>
