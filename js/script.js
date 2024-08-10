@@ -1,4 +1,5 @@
-const vitruvianGroupLabels = [
+const randomGroupLabels = [
+  "logos",
   "bottoms-back",
   "tops-back",
   "shoesR-front",
@@ -12,9 +13,9 @@ const vitruvianGroupLabels = [
   "boards-2",
 ];
 
-const vitruvianGroups = vitruvianGroupLabels.map(label => getVitruvianGroup(label));
+const randomGroups = randomGroupLabels.map(label => getRandomGroup(label));
 
-function getVitruvianGroup(label) {
+function getRandomGroup(label) {
   const elements = [...document.querySelectorAll(`[data-homepage-random-group="${label}"]`)];
   function tick() {
     let randomIndex = Math.floor(Math.random() * elements.length);
@@ -77,7 +78,7 @@ function movementEvaluator(tolerance, callback) {
     const deltaY = Math.abs(currentY - startY);
     const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
 
-    if (distance >= tolerance / 5) {
+    if (distance >= tolerance / 4) {
       callback(distance, deltaX, deltaY);
       startX = undefined;
       startY = undefined;
@@ -92,9 +93,11 @@ function movementEvaluator(tolerance, callback) {
   };
 }
 
-const removeListener = movementEvaluator(70, (distance, deltaX, deltaY) => {
-  vitruvianGroups.forEach(group => group.tick());
-  console.log("Moved", distance, "units:", deltaX, "x", deltaY, "y");
+const removeListener = movementEvaluator(45, (distance, deltaX, deltaY) => {
+  randomGroups.forEach(group => {
+    if (Math.random() >= 0.66) group.tick();
+  });
+  //console.log("Moved", distance, "units:", deltaX, "x", deltaY, "y");
   //document.body.style.backgroundColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
 });
 

@@ -30,9 +30,17 @@ h1,h2,h3,h4,h5,p {
   margin: 0;
 }
 
-.logo {
-  width: 3rem;
-  min-width: 48px;
+.logo-container {
+  position: relative;
+  width: 100%;
+  height: 3rem;
+  min-height: 48px;
+  margin-bottom: 0.5rem;
+}
+
+.logo-container img {
+  position: absolute;
+  height: 100%;
 }
 
 .navigation-link {
@@ -177,7 +185,4 @@ img.vitruvian-star {
   filter: none;
   opacity: 1;
   pointer-events: all;
-}
-[data-homepage-random-group]:hover {
-  transform: scale(1.05);
 }
