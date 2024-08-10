@@ -1,4 +1,5 @@
 const randomGroupLabels = [
+  "backdrop-books",
   "logos",
   "bottoms-back",
   "tops-back",
@@ -21,10 +22,12 @@ function getRandomGroup(label) {
     let randomIndex = Math.floor(Math.random() * elements.length);
     elements.forEach((element, index) => {
       if (index === randomIndex) {
-        elements[index].className = 'vitruvian-show';
+        elements[index].classList.remove("vitruvian-hidden");
+        elements[index].classList.add("vitruvian-show");
         return;
       }
-      elements[index].className = 'vitruvian-hidden';
+      elements[index].classList.add("vitruvian-hidden");
+      elements[index].classList.remove("vitruvian-show");
     });
   }
 
@@ -33,6 +36,7 @@ function getRandomGroup(label) {
   return {
     tick: tick,
     elements: elements,
+    label: label
   };
 }
 
@@ -95,6 +99,10 @@ function movementEvaluator(tolerance, callback) {
 
 const removeListener = movementEvaluator(45, (distance, deltaX, deltaY) => {
   randomGroups.forEach(group => {
+    if (group.label===randomGroupLabels[0]) {
+      if (Math.random() >= 0.4) group.tick();
+      return;
+    }
     if (Math.random() >= 0.66) group.tick();
   });
   //console.log("Moved", distance, "units:", deltaX, "x", deltaY, "y");

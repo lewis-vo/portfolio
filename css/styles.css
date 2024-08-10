@@ -37,7 +37,7 @@ body.scrim::before {
   bottom: 0;
   left: 0;
   background: linear-gradient(180deg, rgba(217, 217, 217, 0.00) 59.59%, rgba(165, 165, 165, 0.36) 74.56%, #A5A5A5 100%);
-  z-index: -99;
+  z-index: -50;
 }
 body::after {
   position: fixed;
@@ -165,6 +165,31 @@ h1,h2,h3,h4,h5,p {
   :root {
     --font-size: 16px;
   }
+}
+
+.backdrop-book {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 70vh;
+  transform: scale(1, 0.7);
+  image-rendering: pixelated;
+  z-index: -55;
+}
+
+.book1 {
+  left: 10%;
+}
+
+.book2 {
+  top: 10%;
+  left: unset;
+  right: 0;
+}
+
+.book3 {
+  left: 17%;
+  top: 40%;
 }
 
 .vitruvian-container {
