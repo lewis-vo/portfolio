@@ -1,0 +1,177 @@
+:root {
+  font-family: "Inter", Helvetica, Arial, sans-serif;
+  font-size: var(--font-size);
+  line-height: 1.173;
+  font-weight: 400;
+  letter-spacing: calc( var(--tracking) * var(--font-size) );
+
+  --font-size: 23px;
+  --tracking: -0.032;
+
+  --color: #F20909;
+  --backdrop: #FFFFFF;
+  color: var(--color);
+  background-color: var(--backdrop);
+}
+
+body {
+  position: relative;
+  margin: 0;
+  width: 100dvw;
+  height: 100dvh;
+  overflow-x: hidden;
+}
+
+a {
+  cursor: pointer;
+}
+
+h1,h2,h3,h4,h5,p {
+  margin: 0;
+}
+
+.logo {
+  width: 3rem;
+  min-width: 48px;
+}
+
+.navigation-link {
+  position: relative;
+  transform-origin: left center;
+  display: inline-block;
+  width: auto;
+  flex-grow: 0;
+  width: fit-content;
+  padding-right: 2rem;
+}
+
+.homepage-main-section {
+  position: relative;
+  width: 100dvw;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 32px;
+  min-height: 620px;
+}
+
+.hide-scroll {
+  overflow: hidden;
+}
+
+.row-section {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  box-sizing: border-box;
+}
+
+.column {
+  width: 100%;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-grow {
+  flex-grow: 1;
+}
+
+.w-100 {
+  width: 100%;
+}
+.h-100 {
+  height: 100%;
+}
+
+@media screen and (max-width: 1000px) {
+  .homepage-main-section {
+    padding: 26px;
+  }
+
+  :root {
+    --font-size: 21px;
+  }
+}
+
+@media screen and (max-width: 680px) {
+  .homepage-main-section {
+    padding: 18px;
+    flex-direction: column;
+  }
+
+  :root {
+    --font-size: 18px;
+  }
+}
+
+@media screen and (max-width: 680px) {
+  .column-on-tablet {
+    flex-direction: column;
+  }
+}
+
+.vitruvian-container {
+  position: fixed;
+  transform: translate3d(-50%,-55%,0);
+  left: 50%;
+  top: 50%;
+  width: 750px;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: -1;
+}
+
+
+.vitruvian-container img {
+  width: 100%;
+  user-select: none;
+  position: absolute;
+}
+
+img.vitruvian-circle {
+  width: 77.205%;
+}
+
+img.vitruvian-square {
+  width: 66.667%;
+  bottom: 10.538%;
+}
+img.vitruvian-star {
+  animation: vitruvian-star-spin 8s infinite linear;
+}
+@keyframes vitruvian-star-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+[data-homepage-random-group] {
+  transition: 0ms;
+}
+
+[data-homepage-random-group].vitruvian-hidden {
+  visibility: visible;
+  opacity: 0;
+  pointer-events: none;
+}
+
+[data-homepage-random-group].vitruvian-show {
+  visibility: visible;
+  filter: none;
+  opacity: 1;
+  pointer-events: all;
+}
+[data-homepage-random-group]:hover {
+  transform: scale(1.05);
+}
