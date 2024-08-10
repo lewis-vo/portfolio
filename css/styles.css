@@ -33,7 +33,7 @@ body.scrim::before {
   position: fixed;
   content: '';
   width:100vw;
-  height: 30vh;
+  height: 20vh;
   bottom: 0;
   left: 0;
   background: linear-gradient(180deg, rgba(217, 217, 217, 0.00) 59.59%, rgba(165, 165, 165, 0.36) 74.56%, #A5A5A5 100%);
@@ -47,7 +47,7 @@ body::after {
   bottom: 0;
   left: 0;
   
-  background-image: url(../assets/background.gif);
+  /*background-image: url(../assets/background.gif);*/
   background-size: cover;
   image-rendering: pixelated;
   z-index: -100;
