@@ -9,8 +9,12 @@
   --tracking: -0.04;
 
   --color: #F20909;
-  --backdrop: #EBEBEB;
+  --backdrop: #f5f5f5;
   color: var(--color);
+
+  background-image: radial-gradient(#ededed 10%, transparent 10%), radial-gradient(#ededed 10%, transparent 10%);
+  background-position: 0px 0px, 8px 8px;
+  background-size: 12px 12px;
   background-color: var(--backdrop);
 }
 
@@ -64,15 +68,23 @@ h1,h2,h3,h4,h5,p {
 
 .logo-container {
   position: relative;
-  width: 100%;
-  height: 3rem;
+  /* width: 100%; */
+  height: 3.2rem;
   min-height: 48px;
   margin-bottom: 0.5rem;
+  width: 5.2rem;
+  background-color: #fff533;
+  border: 2px solid var(--color);
+  /* padding: 0.4rem; */
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .logo-container img {
   position: absolute;
-  height: 100%;
+  height: 80%;
 }
 
 .navigation-link {
@@ -195,7 +207,7 @@ h1,h2,h3,h4,h5,p {
 
 .vitruvian-container {
   position: fixed;
-  transform: translate3d(-50%,-55%,0);
+  transform: translate3d(-50%,-52%,0) skew(-35deg) scaleY(0.9);
   left: 50%;
   top: 50%;
   width: 640px;
