@@ -222,3 +222,15 @@ function updateAppearElements() {
 }
 window.addEventListener("scroll", updateAppearElements);
 window.addEventListener("resize", updateAppearElements);
+
+function applyRandomAnimation() {
+  const randomClothes = document.querySelectorAll('.random-clothes');
+
+  randomClothes.forEach(cloth => {
+    const randomDuration = (Math.random() * (4 - 2) + 2).toFixed(2); // Generate random duration between 1.9 and 3 seconds
+    cloth.style.animationDuration = `${randomDuration}s`;
+  });
+}
+
+// Call the function to apply animations
+applyRandomAnimation();

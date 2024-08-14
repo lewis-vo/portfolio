@@ -5,11 +5,11 @@
   font-weight: 450;
   letter-spacing: calc( var(--tracking) * var(--font-size) );
 
-  --font-size: 23px;
+  --font-size: 22px;
   --tracking: -0.04;
 
   --color: #F20909;
-  --backdrop: #FFFFFF;
+  --backdrop: #EBEBEB;
   color: var(--color);
   background-color: var(--backdrop);
 }
@@ -168,6 +168,7 @@ h1,h2,h3,h4,h5,p {
 }
 
 .backdrop-book {
+  display: none;
   position: absolute;
   top: 0;
   left: 0;
@@ -194,15 +195,35 @@ h1,h2,h3,h4,h5,p {
 
 .vitruvian-container {
   position: fixed;
-  transform: translate3d(-50%,-57%,0);
+  transform: translate3d(-50%,-55%,0);
   left: 50%;
   top: 50%;
-  width: 750px;
+  width: 640px;
   aspect-ratio: 1;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 0;
+  transition: 1s;
+}
+
+.random-clothes {
+  animation: idling 2s infinite;
+  will-change: transform;
+}
+
+@keyframes idling {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.06);
+  }
+
+  100% {
+    transform: scale(1);
+  }
 }
 
 @media screen and (max-width: 680px) {
@@ -210,7 +231,7 @@ h1,h2,h3,h4,h5,p {
     flex-direction: column;
   }
   .vitruvian-container {
-    width: 560px;
+    width: 500px;
   }
   .navigation-link {
     padding-right: 0rem;

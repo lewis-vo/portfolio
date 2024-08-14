@@ -1,37 +1,3 @@
 <svg width="582" height="582" viewBox="0 0 582 582" fill="none" xmlns="http://www.w3.org/2000/svg">
 <rect x="0.883545" y="1.39322" width="580.107" height="580.107" stroke="#F20909"/>
-<path d="M19 1.5V19M36 1V10" stroke="#F20909"/>
-<path d="M52 1.5V19M69 1V10" stroke="#F20909"/>
-<path d="M85 1.5V19M102 1V10" stroke="#F20909"/>
-<path d="M118 1.5V19M135 1V10" stroke="#F20909"/>
-<path d="M151 1.5V19M168 1V10" stroke="#F20909"/>
-<path d="M184 1.5V19M201 1V10" stroke="#F20909"/>
-<path d="M217 1.5V19M234 1V10" stroke="#F20909"/>
-<path d="M250 1.5V19M267 1V10" stroke="#F20909"/>
-<path d="M283 1.5V19M300 1V10" stroke="#F20909"/>
-<path d="M316 1.5V19M333 1V10" stroke="#F20909"/>
-<path d="M349 1.5V19M366 1V10" stroke="#F20909"/>
-<path d="M382 1.5V19M399 1V10" stroke="#F20909"/>
-<path d="M415 1.5V19M432 1V10" stroke="#F20909"/>
-<path d="M448 1.5V19M465 1V10" stroke="#F20909"/>
-<path d="M481 1.5V19M498 1V10" stroke="#F20909"/>
-<path d="M514 1.5V19M531 1V10" stroke="#F20909"/>
-<path d="M547 1.5V19M564 1V10" stroke="#F20909"/>
-<path d="M19 581.5V564M36 582V573" stroke="#F20909"/>
-<path d="M52 581.5V564M69 582V573" stroke="#F20909"/>
-<path d="M85 581.5V564M102 582V573" stroke="#F20909"/>
-<path d="M118 581.5V564M135 582V573" stroke="#F20909"/>
-<path d="M151 581.5V564M168 582V573" stroke="#F20909"/>
-<path d="M184 581.5V564M201 582V573" stroke="#F20909"/>
-<path d="M217 581.5V564M234 582V573" stroke="#F20909"/>
-<path d="M250 581.5V564M267 582V573" stroke="#F20909"/>
-<path d="M283 581.5V564M300 582V573" stroke="#F20909"/>
-<path d="M316 581.5V564M333 582V573" stroke="#F20909"/>
-<path d="M349 581.5V564M366 582V573" stroke="#F20909"/>
-<path d="M382 581.5V564M399 582V573" stroke="#F20909"/>
-<path d="M415 581.5V564M432 582V573" stroke="#F20909"/>
-<path d="M448 581.5V564M465 582V573" stroke="#F20909"/>
-<path d="M481 581.5V564M498 582V573" stroke="#F20909"/>
-<path d="M514 581.5V564M531 582V573" stroke="#F20909"/>
-<path d="M547 581.5V564M564 582V573" stroke="#F20909"/>
 </svg>
