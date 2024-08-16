@@ -250,3 +250,26 @@ function styleTitle() {
 
 styleTitle();
 window.addEventListener("resize", styleTitle);
+
+let navigationLinks = [...document.querySelectorAll("[data-animated-href]")];
+
+navigationLinks.forEach(el => {
+  el.addEventListener("click", () => {
+    document.body.style.overflow = "hidden";
+    document.body.classList.remove("appear-entry-loaded");
+    document.body.addEventListener('transitionend', function(event) {
+      window.location.href = el.dataset.animatedHref;
+    });
+  });
+});
+
+
+
+function fixElementOnScroll(element) {
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    element.style.transform = `translateY(${scrollTop}px)`; // Ensure consistent behavior
+  });
+}
+
+fixElementOnScroll(document.querySelector(".fixed-on-scroll"));

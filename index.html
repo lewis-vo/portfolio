@@ -11,20 +11,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
 
-  <script type="importmap">
-    {
-      "imports": {
-        "three": "https://cdn.jsdelivr.net/npm/three@v0.167.1/build/three.module.js",
-        "three/addons/": "https://cdn.jsdelivr.net/npm/three@v0.167.1/examples/jsm/"
-      }
-    }
-  </script>
 </head>
-<body class="appear-entry" data-appear-entry-duration="800">
+<body class="appear-entry" data-appear-entry-duration="400">
   <main class="homepage-main-section hide-scroll">
     <section class="row-section h-100 column-on-tablet">
       <div class="column flex-column" id="title-column">
-        <div class="logo-container" data-appear data-appear-delay="5" data-appear-clipped="true">
+        <div class="logo-container" data-appear data-appear-delay="5" data-appear-clipped="true" data-animated-href="./index.html">
           <img class="logo" src="./assets/logo3.svg" data-homepage-random-group="">
         </div>
 
@@ -45,8 +37,8 @@
         </div>
       </div>
       <div class="column flex-column" id="specialty-column">
-        <nav>
-          <a class="navigation-link" data-appear-on-load="true" data-appear data-appear-delay="7" data-shuffle-on-hover>[ + Projects ]</a>
+        <nav> 
+          <a class="navigation-link" data-appear-on-load="true" data-appear data-appear-delay="7" data-shuffle-on-hover data-animated-href="./projects.html">[ + Projects ]</a>
         </nav>
         <ul class="design-specialty-list">
           <li data-appear-on-load="true" data-appear data-appear-delay="8">3D</li>
@@ -58,7 +50,7 @@
       </div>
       <div class="column flex-column">
         <nav>
-          <a class="navigation-link" data-appear-on-load="true" data-appear data-appear-delay="10" data-shuffle-on-hover>[ + About ]</a>
+          <a class="navigation-link" data-appear-on-load="true" data-appear data-appear-delay="10" data-shuffle-on-hover data-animated-href="./about.html">[ + About ]</a>
         </nav>
         <div>
           <p data-appear data-appear-on-load="true" data-appear-delay="11" class="monospaced">Ho Chi Minh, VN (GMT +7)</p>
@@ -70,6 +62,5 @@
   </main>
   
   <script src="js/script.js"></script>
-  <script type="module" src="js/main.js"></script>
 </body>
 </html>
