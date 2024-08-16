@@ -1,5 +1,9 @@
 // FETCH AND RANDOMIZE ELEMENTS ON THE PAGE BASED ON MOUSE/DEVICE MOVEMENT
 
+window.onload = () => {
+  document.body.scrollTop=0;
+};
+
 const randomGroupLabels = [
   "backdrop-books",
   "logos",
