@@ -1,3 +1,5 @@
+// FETCH AND RANDOMIZE ELEMENTS ON THE PAGE BASED ON MOUSE/DEVICE MOVEMENT
+
 const randomGroupLabels = [
   "backdrop-books",
   "logos",
@@ -96,7 +98,6 @@ function movementEvaluator(tolerance, callback) {
     window.removeEventListener("mousemove", handleMouseMove);
   };
 }
-
 const removeListener = movementEvaluator(45, (distance, deltaX, deltaY) => {
   randomGroups.forEach(group => {
     if (group.label===randomGroupLabels[0]) {
@@ -118,6 +119,20 @@ if (typeof DeviceOrientationEvent.requestPermission === "function") {
     }
   });
 }
+
+
+
+const shuffleString = (str, replaceChance, replacementChars) => {
+  return str
+    .split("")
+    .map((char) => {
+      return Math.random() < replaceChance
+        ? replacementChars[Math.floor(Math.random() * replacementChars.length)]
+        : char;
+    })
+    .sort(() => Math.random() - 0.5)
+    .join("");
+};
 
 function shuffleTextOnHover() {
   const elements = document.querySelectorAll("[data-shuffle-on-hover]");
@@ -145,20 +160,9 @@ function shuffleTextOnHover() {
     });
   });
 }
-
-function shuffleString(str, replaceChance, replacementChars) {
-  return str
-    .split("")
-    .map((char) => {
-      return Math.random() < replaceChance
-        ? replacementChars[Math.floor(Math.random() * replacementChars.length)]
-        : char;
-    })
-    .sort(() => Math.random() - 0.5)
-    .join("");
-}
-
 shuffleTextOnHover();
+
+
 
 const appearDuration = 1100;
 
@@ -210,8 +214,6 @@ function createMoveInEffect() {
     }
   });
 }
-
-window.addEventListener("load", createMoveInEffect);
 function updateAppearElements() {
   const elements = document.querySelectorAll("[data-appear]");
   elements.forEach((element) => {
@@ -220,17 +222,31 @@ function updateAppearElements() {
     }
   });
 }
+
+window.addEventListener("load", () => {
+  if (document.body.classList.contains("appear-entry")) {
+    let delay = parseInt(document.body.dataset.appearEntryDuration);
+    setTimeout(() => {
+      document.body.classList.add("appear-entry-loaded");
+      document.body.addEventListener('transitionend', function(event) {
+        document.body.style.overflowY = "auto";
+      });
+      createMoveInEffect();
+    }, delay);
+  } else {
+    createMoveInEffect();
+  }
+});
 window.addEventListener("scroll", updateAppearElements);
 window.addEventListener("resize", updateAppearElements);
 
-function applyRandomAnimation() {
-  const randomClothes = document.querySelectorAll('.random-clothes');
+const titleColumn = document.getElementById("title-column");
+const titleContainer = titleColumn.querySelector(".big-title-container");
 
-  randomClothes.forEach(cloth => {
-    const randomDuration = (Math.random() * (4 - 2) + 2).toFixed(2); // Generate random duration between 1.9 and 3 seconds
-    cloth.style.animationDuration = `${randomDuration}s`;
-  });
+function styleTitle() {
+  let width = titleColumn.offsetWidth;
+  titleContainer.style.height = width + "px";
 }
 
-// Call the function to apply animations
-applyRandomAnimation();
+styleTitle();
+window.addEventListener("resize", styleTitle);

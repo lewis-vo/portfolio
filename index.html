@@ -7,128 +7,68 @@
 
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
+
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@v0.167.1/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@v0.167.1/examples/jsm/"
+      }
+    }
+  </script>
 </head>
-<body>
+<body class="appear-entry" data-appear-entry-duration="800">
   <main class="homepage-main-section hide-scroll">
-    <img class="backdrop-book book1" src="./assets/book1.png" data-homepage-random-group="backdrop-books">
-    <img class="backdrop-book book2" src="./assets/book2.png" data-homepage-random-group="backdrop-books">
-    <img class="backdrop-book book3" src="./assets/book3.png" data-homepage-random-group="backdrop-books">
-
-    <div class="vitruvian-container" id="central">
-      <img class="vitruvian-circle" src="./assets/vitruvian/circle.svg"
-        data-appear
-        data-appear-on-load="true"
-        data-appear-clipped="true"
-        data-appear-delay="5.4">
-      <img class="vitruvian-square" src="./assets/vitruvian/square.svg"
-        data-appear
-        data-appear-on-load="true"
-        data-appear-delay="2.6">
-
-      <img class="random-clothes" src="./assets/vitruvian/1x/2 Large.png" data-homepage-random-group="">
-
-      <img class="random-clothes" src="./assets/vitruvian/1x/3 Large.png" data-homepage-random-group="bottoms-back">
-      <img class="random-clothes" src="./assets/vitruvian/1x/4 Large.png" data-homepage-random-group="bottoms-back">
-
-      <img class="random-clothes" src="./assets/vitruvian/1x/5 Large.png" data-homepage-random-group="tops-back">
-      <img class="random-clothes" src="./assets/vitruvian/1x/6 Large.png" data-homepage-random-group="tops-back">
-      <img class="random-clothes" src="./assets/vitruvian/1x/7 Large.png" data-homepage-random-group="tops-back">
-      <img class="random-clothes" src="./assets/vitruvian/1x/8 Large.png" data-homepage-random-group="tops-back">
-
-      <img class="random-clothes" src="./assets/vitruvian/1x/9 Large.png" data-homepage-random-group="">
-
-      <img class="random-clothes" src="./assets/vitruvian/1x/10 Large.png" data-homepage-random-group="shoesR-front">
-      <img class="random-clothes" src="./assets/vitruvian/1x/11 Large.png" data-homepage-random-group="shoesL-front">
-
-      <img class="random-clothes" src="./assets/vitruvian/1x/12 Large.png" data-homepage-random-group="shoesR-back">
-      <img class="random-clothes" src="./assets/vitruvian/1x/13 Large.png" data-homepage-random-group="shoesL-back">
-
-      <img class="random-clothes" src="./assets/vitruvian/1x/14 Large.png" data-homepage-random-group="shoesR-front">
-      <img class="random-clothes" src="./assets/vitruvian/1x/15 Large.png" data-homepage-random-group="shoesL-front">
-
-      <img class="random-clothes" src="./assets/vitruvian/1x/16 Large.png" data-homepage-random-group="shoesR-back">
-      <img class="random-clothes" src="./assets/vitruvian/1x/17 Large.png" data-homepage-random-group="shoesL-back">
-
-      <img class="random-clothes" src="./assets/vitruvian/1x/18 Large.png" data-homepage-random-group="bottoms-front">
-      <img class="random-clothes" src="./assets/vitruvian/1x/19 Large.png" data-homepage-random-group="bottoms-front">
-      <img class="random-clothes" src="./assets/vitruvian/1x/20 Large.png" data-homepage-random-group="bottoms-front">
-
-      <img class="random-clothes" src="./assets/vitruvian/1x/22 Large.png" data-homepage-random-group="tops-front">
-      <img class="random-clothes" src="./assets/vitruvian/1x/23 Large.png" data-homepage-random-group="tops-front">
-      <img class="random-clothes" src="./assets/vitruvian/1x/24 Large.png" data-homepage-random-group="tops-front">
-      <img class="random-clothes" src="./assets/vitruvian/1x/25 Large.png" data-homepage-random-group="tops-front">
-      <img class="random-clothes" src="./assets/vitruvian/1x/26 Large.png" data-homepage-random-group="tops-front">
-
-      <img class="random-clothes" src="./assets/vitruvian/1x/27 Large.png" data-homepage-random-group="heads">
-      <img class="random-clothes" src="./assets/vitruvian/1x/28 Large.png" data-homepage-random-group="heads">
-      <img class="random-clothes" src="./assets/vitruvian/1x/29 Large.png" data-homepage-random-group="heads">
-      <img class="random-clothes" src="./assets/vitruvian/1x/30 Large.png" data-homepage-random-group="heads">
-      <img class="random-clothes" src="./assets/vitruvian/1x/31 Large.png" data-homepage-random-group="heads">
-      <img class="random-clothes" src="./assets/vitruvian/1x/33 Large.png" data-homepage-random-group="heads">
-      <img class="random-clothes" src="./assets/vitruvian/1x/34 Large.png" data-homepage-random-group="heads">
-      <img class="random-clothes" src="./assets/vitruvian/1x/35 Large.png" data-homepage-random-group="heads">
-      <img class="random-clothes" src="./assets/vitruvian/1x/36 Large.png" data-homepage-random-group="heads">
-      <img class="random-clothes" src="./assets/vitruvian/1x/37 Large.png" data-homepage-random-group="heads">
-      <img class="random-clothes" src="./assets/vitruvian/1x/38 Large.png" data-homepage-random-group="heads">
-      <img class="random-clothes" src="./assets/vitruvian/1x/39 Large.png" data-homepage-random-group="heads">
-
-      <img class="random-clothes" src="./assets/vitruvian/1x/40 Large.png" data-homepage-random-group="boards-1">
-      <img class="random-clothes" src="./assets/vitruvian/1x/41 Large.png" data-homepage-random-group="boards-1">
-      <img class="random-clothes" src="./assets/vitruvian/1x/42 Large.png" data-homepage-random-group="boards-2">
-      <img class="random-clothes" src="./assets/vitruvian/1x/43 Large.png" data-homepage-random-group="boards-2">
-      <img class="random-clothes" src="./assets/vitruvian/1x/44 Large.png" data-homepage-random-group="boards-2">
-    </div>
-
-    <section class="row-section">
-      <div class="column flex-column">
+    <section class="row-section h-100 column-on-tablet">
+      <div class="column flex-column" id="title-column">
         <div class="logo-container" data-appear data-appear-delay="5" data-appear-clipped="true">
-          <img class="logo" src="./assets/logo1.svg" data-homepage-random-group="logos">
-          <img class="logo" src="./assets/logo2.svg" data-homepage-random-group="logos">
-          <img class="logo" src="./assets/logo3.svg" data-homepage-random-group="logos">
-          <img class="logo" src="./assets/logo4.svg" data-homepage-random-group="logos">
-          <img class="logo" src="./assets/logo5.svg" data-homepage-random-group="logos">
-          <img class="logo" src="./assets/logo6.svg" data-homepage-random-group="logos">
+          <img class="logo" src="./assets/logo3.svg" data-homepage-random-group="">
         </div>
-        <p data-appear data-appear-delay="10">
-          HOME
-        </p>
-      </div>
-      <div class="flex-grow w-100"></div>
-      <nav class="column flex-column">
-        <a class="navigation-link" data-appear data-appear-delay="6" data-shuffle-on-hover>[ HOME ]</a>
-        <a class="navigation-link" data-appear data-appear-delay="8" data-shuffle-on-hover>[ PROJECTS ]</a>
-        <a class="navigation-link" data-appear data-appear-delay="10" data-shuffle-on-hover>[ ABOUT ]</a>
-      </nav>
-    </section>
 
-    <section class="row-section h-100">
-      <div class="column flex-column">
-      </div>
-      <div class="column flex-column">
-      </div>
-      <div class="column flex-column">
-      </div>
-    </section>
+        <div class="flex-grow"></div>
 
-    <section class="row-section column-on-tablet">
-      <div class="column flex-column">
-        <div class="flex-grow h-100"></div>
-        <p data-appear data-appear-delay="2" data-appear-clipped="true">
-          Design Portfolio 2024
-        </p>
-        <p data-appear data-appear-delay="4" data-appear-clipped="true">
-          Made in (N 10° 43' 47 E 106° 41' 38)
-        </p>
+        <div class="big-title-container">
+          <div class="title-line">
+            <img src="./assets/titles/L.svg" data-appear-on-load="true" data-appear data-appear-delay="2">
+            <img src="./assets/titles/E.svg" data-appear-on-load="true" data-appear data-appear-delay="3.5">
+            <img src="./assets/titles/W.svg" data-appear-on-load="true" data-appear data-appear-delay="5">
+            <img src="./assets/titles/I.svg" data-appear-on-load="true" data-appear data-appear-delay="6.5">
+            <img src="./assets/titles/S.svg" data-appear-on-load="true" data-appear data-appear-delay="8">
+          </div>
+          <div class="title-line">
+            <img src="./assets/titles/V.svg" data-appear-on-load="true" data-appear data-appear-delay="10.5">
+            <img src="./assets/titles/O.svg" data-appear-on-load="true" data-appear data-appear-delay="12">
+          </div>
+        </div>
       </div>
-      <div class="flex-grow w-100"></div>
+      <div class="column flex-column" id="specialty-column">
+        <nav>
+          <a class="navigation-link" data-appear-on-load="true" data-appear data-appear-delay="7" data-shuffle-on-hover>[ + Projects ]</a>
+        </nav>
+        <ul class="design-specialty-list">
+          <li data-appear-on-load="true" data-appear data-appear-delay="8">3D</li>
+          <li data-appear-on-load="true" data-appear data-appear-delay="9">Graphics</li>
+          <li data-appear-on-load="true" data-appear data-appear-delay="10">Branding</li>
+          <li data-appear-on-load="true" data-appear data-appear-delay="11">Typography</li>
+          <li data-appear-on-load="true" data-appear data-appear-delay="12">Interactive</li>
+        </ul>
+      </div>
       <div class="column flex-column">
-        <p data-appear data-appear-delay="8">
-          Hi, I'm Lewis. I'm a Design Studies student at RMIT Vietnam who strives to achieve perfection through imperfect means.
-        </p>
+        <nav>
+          <a class="navigation-link" data-appear-on-load="true" data-appear data-appear-delay="10" data-shuffle-on-hover>[ + About ]</a>
+        </nav>
+        <div>
+          <p data-appear data-appear-on-load="true" data-appear-delay="11" class="monospaced">Ho Chi Minh, VN (GMT +7)</p>
+          <p data-appear data-appear-on-load="true" data-appear-delay="13" class="monospaced">Made in N 10° 43' 47 E 106° 41' 38</p>
+        </div>
+
       </div>
     </section>
   </main>
+  
   <script src="js/script.js"></script>
+  <script type="module" src="js/main.js"></script>
 </body>
 </html>
