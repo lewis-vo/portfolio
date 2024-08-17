@@ -444,8 +444,8 @@ canvas {
 
 @media screen and (max-width: 640px) {
   canvas {
-    bottom: 5vh;
-    right: -25vw;
+    bottom: 50px;
+    right: -200px;
   }
 }
 

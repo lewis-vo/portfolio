@@ -5,7 +5,7 @@ import { RGBELoader } from 'three/addons/loaders/RGBELoader.js';
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera( 80, 600/700, 0.1, 1000 );
 camera.position.set(0, 0.24, 0.44);
-camera.rotation.z = 0.12;
+camera.rotation.z = 0.2;
 
 const pointLight = new THREE.PointLight(0xffffff, 1, 0);
 pointLight.position.set(0.3, 0.2, -0.5);
