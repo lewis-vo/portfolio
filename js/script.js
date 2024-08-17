@@ -267,9 +267,9 @@ navigationLinks.forEach(el => {
   });
 });
 
-
-
 function fixElementOnScroll(element) {
+  if (element === null) return;
+
   window.addEventListener('scroll', () => {
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     element.style.transform = `translateY(${scrollTop}px)`; // Ensure consistent behavior

@@ -1,17 +1,36 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { RGBELoader } from 'three/addons/loaders/RGBELoader.js';
-import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
-import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
-import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
-import { GammaCorrectionShader } from 'three/addons/shaders/GammaCorrectionShader.js';
-import { SAOPass } from 'three/addons/postprocessing/SAOPass.js';
-import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
-
-THREE.ColorManagement.legacyMode = false;
 
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+const camera = new THREE.PerspectiveCamera( 80, 600/700, 0.1, 1000 );
+camera.position.set(0, 0.24, 0.44);
+camera.rotation.z = 0.12;
+
+const pointLight = new THREE.PointLight(0xffffff, 1, 0);
+pointLight.position.set(0.3, 0.2, -0.5);
+scene.add(pointLight);
+
+const pointLightHelper = new THREE.PointLightHelper(pointLight, 0.05, 0xff0000);
+//scene.add(pointLightHelper);
+
+
+const pointLight2 = new THREE.PointLight(0xfffce3, 0.2, -0.01);
+pointLight2.position.set(-0.23, 0.3, 0.1);
+scene.add(pointLight2);
+
+const pointLightHelper2 = new THREE.PointLightHelper(pointLight2, 0.05, 0xff0000);
+//scene.add(pointLightHelper2);
+
+
+
+const pointLight3 = new THREE.PointLight(0xffffff, 0.009, 0);
+pointLight3.position.set(0, 0.2, 0.3);
+scene.add(pointLight3);
+
+const pointLightHelper3 = new THREE.PointLightHelper(pointLight3, 0.05, 0xff0000);
+//scene.add(pointLightHelper3);
+
 
 const renderer = new THREE.WebGLRenderer(
   { alpha: true,
@@ -19,59 +38,48 @@ const renderer = new THREE.WebGLRenderer(
 );
 renderer.outputEncoding = THREE.sRGBEncoding;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 0.95;
 renderer.shadowMap.enabled = true;
-renderer.setSize( window.innerWidth, window.innerHeight );
+renderer.setPixelRatio(window.devicePixelRatio);
+renderer.setSize(600, 700);
 document.body.appendChild( renderer.domElement );
-
-const loader = new GLTFLoader();
-
 const rgbeLoader = new RGBELoader();
 rgbeLoader.load('../assets/3d/textures/environment.hdr', function (texture) {
     texture.mapping = THREE.EquirectangularReflectionMapping;
-
     scene.environment = texture;
+
+    scene.environment.intensity = 0.9;
 
     // Optional: Convert to equirectangular format
 });
 
-function zoomToObject(camera, object, desiredDistance) {
-  // Calculate object's bounding box
-  const box = new THREE.Box3().setFromObject(object);
-  const center = box.getCenter(new THREE.Vector3());
-  const size = box.getSize(new THREE.Vector3());   
-
-
-  // Calculate camera position
-  const distance = Math.max(size.x, size.y, size.z) * desiredDistance;
-  const direction = new THREE.Vector3().subVectors(camera.position, center).normalize();
-  camera.position.copy(center).add(direction.multiplyScalar(distance));
-
-  // Look at the object
-  camera.lookAt(center);
+async function loadModel(path) {
+  const loader = new GLTFLoader();
+  const gltf = await loader.loadAsync(path);
+  return gltf.scene;
 }
-let tamagotchi;
-await loader.load( '../assets/3d/tamagotchi.glb', function ( gltf ) {
-  tamagotchi = gltf.scene;
-	scene.add( gltf.scene );
-  zoomToObject(camera, tamagotchi, 1.5);
-}, undefined, function ( error ) {
-} );
 
 
-const composer = new EffectComposer(renderer);
 
-// Add passes
-const renderPass = new RenderPass(scene, camera);
-composer.addPass(renderPass);
+async function main() {
+  const tamagotchi = await loadModel('../assets/3d/tamagotchi.glb');
+  scene.add(tamagotchi);
+  
+  let time = 0;
+  const amplitude = 0.02; // Height of the bob
+  const frequency = 0.5;
 
-composer.addPass(new ShaderPass(GammaCorrectionShader));
+  function animate() {
+    requestAnimationFrame(animate);
 
-function animate() {
-  tamagotchi.rotation.x = 1;
-  tamagotchi.rotation.z = 1;
-  tamagotchi.rotation.y += 0.007;
-  composer.render();
+    tamagotchi.rotation.y += 0.005;
+    
+    time += 0.01;
+    tamagotchi.position.y = amplitude * Math.sin(time * frequency);
+
+    renderer.render(scene, camera);
+  }
+  animate();
 }
-console.log(GammaCorrectionShader);
 
-renderer.setAnimationLoop( animate );
+main();
