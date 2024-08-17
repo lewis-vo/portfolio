@@ -44,7 +44,7 @@ renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(600, 700);
 document.body.appendChild( renderer.domElement );
 const rgbeLoader = new RGBELoader();
-rgbeLoader.load('../assets/3d/textures/environment.hdr', function (texture) {
+rgbeLoader.load('https://lewis-vo.github.io/portfolio/assets/3d/textures/environment.hdr', function (texture) {
     texture.mapping = THREE.EquirectangularReflectionMapping;
     scene.environment = texture;
 
@@ -59,10 +59,11 @@ async function loadModel(path) {
   return gltf.scene;
 }
 
+console.log(location.hostname);
 
 
 async function main() {
-  const tamagotchi = await loadModel('../assets/3d/tamagotchi.glb');
+  const tamagotchi = await loadModel('https://lewis-vo.github.io/portfolio/assets/3d/tamagotchi.glb');
   scene.add(tamagotchi);
   
   let time = 0;
