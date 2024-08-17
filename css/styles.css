@@ -428,6 +428,7 @@ canvas {
   position: fixed;
   top: unset;
   transform: scale(1);
+  pointer-events: none;
 }
 
 .appear-entry canvas {
