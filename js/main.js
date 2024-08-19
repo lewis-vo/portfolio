@@ -5,7 +5,7 @@ import { RGBELoader } from 'three/addons/loaders/RGBELoader.js';
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera( 80, 600/700, 0.1, 1000 );
 camera.position.set(0, 0.24, 0.44);
-camera.rotation.z = 0.2;
+if (page!=="about") camera.rotation.z = -0.1;
 
 const pointLight = new THREE.PointLight(0xffffff, 1, 0);
 pointLight.position.set(0.3, 0.2, -0.5);
@@ -42,7 +42,11 @@ renderer.toneMappingExposure = 0.95;
 renderer.shadowMap.enabled = true;
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(600, 700);
-document.body.appendChild( renderer.domElement );
+if (page==="about") {
+  document.querySelector(".head-container").appendChild( renderer.domElement );
+} else {
+  document.body.appendChild( renderer.domElement );
+}
 const rgbeLoader = new RGBELoader();
 rgbeLoader.load('https://lewis-vo.github.io/portfolio/assets/3d/textures/environment.hdr', function (texture) {
     texture.mapping = THREE.EquirectangularReflectionMapping;
@@ -62,7 +66,8 @@ async function loadModel(path) {
 console.log(location.hostname);
 
 
-async function main() {
+async function mainHome() {
+  //https://lewis-vo.github.io/portfolio/assets/3d/tamagotchi.glb
   const tamagotchi = await loadModel('https://lewis-vo.github.io/portfolio/assets/3d/tamagotchi.glb');
   scene.add(tamagotchi);
   
@@ -83,4 +88,34 @@ async function main() {
   animate();
 }
 
-main();
+async function mainPage() {
+  const head = await loadModel('https://lewis-vo.github.io/portfolio/assets/3d/head.glb');
+  scene.add(head);
+  head.scale.set(0.2, 0.2, 0.2);
+  
+  let time = 0;
+  const amplitude = 0.02; // Height of the bob
+  const frequency = 0.5;
+
+  function animate() {
+    requestAnimationFrame(animate);
+
+    head.rotation.y += 0.005;
+    
+    time += 0.01;
+    head.position.y = amplitude * Math.sin(time * frequency) + 0.3;
+
+    renderer.render(scene, camera);
+  }
+  animate();
+}
+
+switch (page) {
+  case "home": 
+    mainHome();
+    break
+  case "about":
+    mainPage();
+    break;
+  default: break;
+}

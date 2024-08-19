@@ -102,6 +102,7 @@ function movementEvaluator(tolerance, callback) {
     window.removeEventListener("mousemove", handleMouseMove);
   };
 }
+/*
 const removeListener = movementEvaluator(45, (distance, deltaX, deltaY) => {
   randomGroups.forEach(group => {
     if (group.label===randomGroupLabels[0]) {
@@ -113,6 +114,7 @@ const removeListener = movementEvaluator(45, (distance, deltaX, deltaY) => {
   //console.log("Moved", distance, "units:", deltaX, "x", deltaY, "y");
   //document.body.style.backgroundColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
 });
+*/
 
 if (typeof DeviceOrientationEvent.requestPermission === "function") {
   let click = false;
@@ -267,13 +269,11 @@ navigationLinks.forEach(el => {
   });
 });
 
-function fixElementOnScroll(element) {
-  if (element === null) return;
 
-  window.addEventListener('scroll', () => {
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    element.style.transform = `translateY(${scrollTop}px)`; // Ensure consistent behavior
+window.addEventListener('scroll', function() {
+  const scrollY = window.pageYOffset;
+
+  document.querySelectorAll('.parallax').forEach(element => {
+    //element.style.transform = `translateY(${scrollY * 0.1}px)`;
   });
-}
-
-fixElementOnScroll(document.querySelector(".fixed-on-scroll"));
+});
