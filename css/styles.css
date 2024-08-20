@@ -105,8 +105,8 @@ h1,h2,h3,h4,h5,p {
 .logo-container {
   position: relative;
   width: 100%;
-  height: 34px;
-  margin-bottom: 0.5rem;
+  height: 36px;
+  margin-bottom: 0.7rem;
   box-sizing: border-box;
   display: flex;
   cursor: pointer;
@@ -307,7 +307,7 @@ span.monospaced {
     padding-right: 0rem;
   }
   .big-title-container {
-    top: 56px;
+    top: 64px;
     transform: none !important;
     height: 230px !important;
   }
