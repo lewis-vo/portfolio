@@ -274,6 +274,11 @@ let navigationLinks = [...document.querySelectorAll("[data-animated-href]")];
 
 navigationLinks.forEach(el => {
   el.addEventListener("click", () => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
     document.body.style.transform = "";
     document.body.style.overflow = "hidden";
     document.body.classList.remove("appear-entry-loaded");
@@ -308,7 +313,7 @@ window.addEventListener('scroll', function() {
   });
   if (spinningFan) spinningFan.style.setProperty('--rotation', scrollY/4 + 'deg');
   if (backToTop) {
-    if (scrollY > 500) {
+    if (scrollY > 410) {
       backToTop.classList.add("appeared");
     } else {
       backToTop.classList.remove("appeared");
