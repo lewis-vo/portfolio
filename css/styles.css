@@ -835,5 +835,14 @@ overflow: hidden;
   color: var(--color);
   display: flex;
   align-items: center;
-  box-shadow: 0 1px 0 var(--color);
+  box-shadow: inset 0 -1px 0 var(--color);
+  font-weight: 400;
+}
+
+.contact a {
+  width: 100%;
+  font-weight: inherit;
+  text-transform: inherit;
+  text-decoration: inherit;
+  color: inherit;
 }
