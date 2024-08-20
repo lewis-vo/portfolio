@@ -1,7 +1,12 @@
 // FETCH AND RANDOMIZE ELEMENTS ON THE PAGE BASED ON MOUSE/DEVICE MOVEMENT
 
+if ('scrollRestoration' in history) {
+  history.scrollRestoration = 'manual';
+}
+
 window.onload = () => {
-  document.body.scrollTop=0;
+  document.body.scrollTop = 0;
+  window.scrollTo(0, 0);
 };
 
 const randomGroupLabels = [
@@ -231,11 +236,19 @@ function updateAppearElements() {
 
 window.addEventListener("load", () => {
   if (document.body.classList.contains("appear-entry")) {
+    let doneAnim = false;
+    window.scrollTo(0, 0);
     let delay = parseInt(document.body.dataset.appearEntryDuration);
     setTimeout(() => {
       document.body.classList.add("appear-entry-loaded");
       document.body.addEventListener('transitionend', function(event) {
+        if (event.target !== document.body) return;
+        if (doneAnim) return;
+
         document.body.style.overflowY = "auto";
+        document.body.style.transform = "none";
+
+        doneAnim = true;
       });
       createMoveInEffect();
     }, delay);
@@ -261,19 +274,52 @@ let navigationLinks = [...document.querySelectorAll("[data-animated-href]")];
 
 navigationLinks.forEach(el => {
   el.addEventListener("click", () => {
+    document.body.style.transform = "";
     document.body.style.overflow = "hidden";
     document.body.classList.remove("appear-entry-loaded");
     document.body.addEventListener('transitionend', function(event) {
+      if (event.target !== document.body) return;
       window.location.href = el.dataset.animatedHref;
     });
   });
 });
 
 
-window.addEventListener('scroll', function() {
-  const scrollY = window.pageYOffset;
+const spinningFan = document.getElementById("spinning-fan");
+const floatings = [...document.querySelectorAll(".stall")];
+const backToTop = document.getElementById("back-to-top");
 
-  document.querySelectorAll('.parallax').forEach(element => {
-    //element.style.transform = `translateY(${scrollY * 0.1}px)`;
+window.addEventListener('scroll', function() {
+  const scrollY = window.scrollY;
+  if (!document.body.classList.contains("appear-entry-loaded")) {
+    window.scrollY = 0;
+  }
+  floatings.forEach(el => {
+    const direction = (el.dataset.moveTo) ? el.dataset.moveTo : "none";
+
+    if (direction === "left") el.style.marginLeft = (scrollY * parseFloat(el.dataset.floatRate)) + 'px';
+    if (direction === "right") el.style.marginRight = (scrollY * parseFloat(el.dataset.floatRate)) + 'px';
+
+    if (el.dataset.floatTransform === "true") {
+      el.style.transform = `translateY(-${scrollY * parseFloat(el.dataset.floatRate)}px)`;
+    } else {
+      el.style.marginBottom = scrollY * parseFloat(el.dataset.floatRate) + 'px';
+    }
+  });
+  if (spinningFan) spinningFan.style.setProperty('--rotation', scrollY/4 + 'deg');
+  if (backToTop) {
+    if (scrollY > 500) {
+      backToTop.classList.add("appeared");
+    } else {
+      backToTop.classList.remove("appeared");
+    }
+  } 
+});
+
+if (backToTop) backToTop.addEventListener("click", () => {
+  window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: "smooth",
   });
 });

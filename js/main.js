@@ -2,10 +2,11 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { RGBELoader } from 'three/addons/loaders/RGBELoader.js';
 
+const page = "home";
+
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera( 80, 600/700, 0.1, 1000 );
-camera.position.set(0, 0.24, 0.44);
-if (page!=="about") camera.rotation.z = -0.1;
+const camera = new THREE.PerspectiveCamera( 50, 600/700, 0.1, 1000 );
+camera.position.set(0, 0.24, 0.9);
 
 const pointLight = new THREE.PointLight(0xffffff, 1, 0);
 pointLight.position.set(0.3, 0.2, -0.5);
@@ -41,12 +42,10 @@ renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.toneMappingExposure = 0.95;
 renderer.shadowMap.enabled = true;
 renderer.setPixelRatio(window.devicePixelRatio);
-renderer.setSize(600, 700);
-if (page==="about") {
-  document.querySelector(".head-container").appendChild( renderer.domElement );
-} else {
-  document.body.appendChild( renderer.domElement );
-}
+renderer.setSize(900, 1000);
+
+document.body.appendChild( renderer.domElement );
+
 const rgbeLoader = new RGBELoader();
 rgbeLoader.load('https://lewis-vo.github.io/portfolio/assets/3d/textures/environment.hdr', function (texture) {
     texture.mapping = THREE.EquirectangularReflectionMapping;
@@ -60,50 +59,76 @@ rgbeLoader.load('https://lewis-vo.github.io/portfolio/assets/3d/textures/environ
 async function loadModel(path) {
   const loader = new GLTFLoader();
   const gltf = await loader.loadAsync(path);
-  return gltf.scene;
+  return gltf;
 }
 
 console.log(location.hostname);
 
-
-async function mainHome() {
-  //https://lewis-vo.github.io/portfolio/assets/3d/tamagotchi.glb
-  const tamagotchi = await loadModel('https://lewis-vo.github.io/portfolio/assets/3d/tamagotchi.glb');
-  scene.add(tamagotchi);
-  
-  let time = 0;
-  const amplitude = 0.02; // Height of the bob
-  const frequency = 0.5;
-
-  function animate() {
-    requestAnimationFrame(animate);
-
-    tamagotchi.rotation.y += 0.005;
-    
-    time += 0.01;
-    tamagotchi.position.y = amplitude * Math.sin(time * frequency);
-
-    renderer.render(scene, camera);
-  }
-  animate();
+function lerp(t, a, b) {
+  return a + (b - a) * t;
 }
 
-async function mainPage() {
-  const head = await loadModel('https://lewis-vo.github.io/portfolio/assets/3d/head.glb');
-  scene.add(head);
-  head.scale.set(0.2, 0.2, 0.2);
-  
+function smoothLerp(current, target, speed, deltaTime) {
+  return lerp(current, target, speed * deltaTime);
+}
+
+async function mainHome() {
+  let mouseX, mouseY;
+  document.body.addEventListener("mousemove", (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  });
+
+  //https://lewis-vo.github.io/portfolio/assets/3d/tamagotchi.glb
+  //https://lewis-vo.github.io/portfolio/assets/3d/tamagotchi2.glb
+  const tamagotchiGLTF = await loadModel('https://lewis-vo.github.io/portfolio/assets/3d/tamagotchi2.glb');
+  const tamagotchi = tamagotchiGLTF.scene;
+
+  let flip = false;
+
+  const animations = tamagotchiGLTF.animations;
+  const mixer = new THREE.AnimationMixer(tamagotchi);
+  // Assuming you want to play the first animation
+
+  const clock = new THREE.Clock();
+
+  /*document.getElementById("flip-button").addEventListener("click", (e) => {
+    console.log("cilik");
+    flip = !flip;
+  });*/
+
+  animations.forEach(anim => {
+    const action = mixer.clipAction(anim);
+    action.timeScale = 0.8;
+    action.play();
+  });
+
+
+  scene.add(tamagotchi);
+
   let time = 0;
   const amplitude = 0.02; // Height of the bob
-  const frequency = 0.5;
+  const frequency = 1;
+
 
   function animate() {
+    let percentX = mouseX/window.innerWidth,
+        percentY = mouseY/window.innerHeight;
+
+    let delta = clock.getDelta();
+    time+=delta;
     requestAnimationFrame(animate);
 
-    head.rotation.y += 0.005;
+    mixer.update(delta);
+
+    const newRotationY = lerp(percentX, -0.8, -0.2) + ((flip) ? 4 : 0);
+    const newRotationX = lerp(percentY, -0.3, 0.1);
+
+    tamagotchi.rotation.x = -0.2;
+    tamagotchi.rotation.z = -0.1;
+    tamagotchi.rotation.y = -0.65 + ((flip) ? 4.6 : 0);
     
-    time += 0.01;
-    head.position.y = amplitude * Math.sin(time * frequency) + 0.3;
+    tamagotchi.position.y = amplitude * Math.sin(time * frequency);
 
     renderer.render(scene, camera);
   }
@@ -114,8 +139,5 @@ switch (page) {
   case "home": 
     mainHome();
     break
-  case "about":
-    mainPage();
-    break;
   default: break;
 }

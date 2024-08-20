@@ -21,6 +21,9 @@
 </head>
 <body class="appear-entry row-section h-100 column-on-tablet subpage-main-section" data-appear-entry-duration="400">
   <div class="column flex-column subpage-titlecolumn" id="title-column">
+
+    <div class="divider halfed">
+    </div>
     <div class="logo-container" data-appear data-appear-delay="5" data-appear-clipped="true">
       <img class="logo" src="./assets/logo_main.svg" data-homepage-random-group="" data-animated-href="./index.html">
     </div>
@@ -31,28 +34,84 @@
 
     <div class="big-title-container">
       <div class="title-line">
-        <img src="./assets/titles/A.svg" data-appear-on-load="true" data-appear data-appear-delay="2">
-        <img src="./assets/titles/B.svg" data-appear-on-load="true" data-appear data-appear-delay="3.5">
+        <img src="./assets/titles/W.svg" data-appear-on-load="true" data-appear data-appear-delay="2">
+        <img src="./assets/titles/H.svg" data-appear-on-load="true" data-appear data-appear-delay="3.5">
         <img src="./assets/titles/O.svg" data-appear-on-load="true" data-appear data-appear-delay="5">
-        <img src="./assets/titles/U.svg" data-appear-on-load="true" data-appear data-appear-delay="6.5">
-        <img src="./assets/titles/T.svg" data-appear-on-load="true" data-appear data-appear-delay="8">
       </div>
       <div class="title-line">
-        <img src="./assets/titles/M.svg" data-appear-on-load="true" data-appear data-appear-delay="10.5">
-        <img src="./assets/titles/E.svg" data-appear-on-load="true" data-appear data-appear-delay="12">
+        <img src="./assets/titles/A.svg" data-appear-on-load="true" data-appear data-appear-delay="6.5">
+        <img src="./assets/titles/M.svg" data-appear-on-load="true" data-appear data-appear-delay="8">
+        <img src="./assets/titles/I.svg" data-appear-on-load="true" data-appear data-appear-delay="10.5" style="visibility: hidden;">
+        <img src="./assets/titles/I.svg" data-appear-on-load="true" data-appear data-appear-delay="10.5">
+        <img src="./assets/titles/I.svg" data-appear-on-load="true" data-appear data-appear-delay="10.5" style="visibility: hidden;">
+        <img src="./assets/titles/qmark.svg" data-appear-on-load="true" data-appear data-appear-delay="12">
       </div>
+    </div>
+    <div class="divider halfed">
+      <div
+        class="line"
+        data-appear
+        data-appear-on-load="true"
+        data-appear-clipped="true"
+        data-appear-delay="2"
+      ></div>
+      <div
+        class="line"
+        data-appear
+        data-appear-on-load="true"
+        data-appear-clipped="true"
+        data-appear-delay="4"
+      ></div>
     </div>
   </div>
   <section class="content-container">
-    <div class="head-container" data-appear-on-load="true" data-appear data-appear-delay="4"></div>
+    <ul class="contact-list">
+      <li class="contact" data-appear-on-load="true" data-appear data-appear-delay="8"><a data-shuffle-on-hover>lewis.vo@icloud.com</a></li>
+      <li class="contact" data-appear-on-load="true" data-appear data-appear-delay="10"><a data-shuffle-on-hover>LINKEDIN</a></li>
+      <li class="contact" data-appear-on-load="true" data-appear data-appear-delay="12"><a data-shuffle-on-hover>INSTAGRAM</a></li>
+    </ul>
+
+    <div class="spinning-fan-container" style="display: none;">
+      <div class="spinning-fan" id="spinning-fan">
+        <div class="fan-blade">
+          <div class="blade-content">Trying</div>
+        </div>
+        <div class="fan-blade">
+          <div class="blade-content">to</div>
+        </div>
+        <div class="fan-blade">
+          <div class="blade-content">find</div>
+        </div>
+        <div class="fan-blade">
+          <div class="blade-content">perfection</div>
+        </div>
+        <div class="fan-blade">
+          <div class="blade-content">in</div>
+        </div>
+        <div class="fan-blade">
+          <div class="blade-content">imperfect,</div>
+        </div>
+        <div class="fan-blade">
+          <div class="blade-content">ordinary</div>
+        </div>
+        <div class="fan-blade">
+          <div class="blade-content">things.</div>
+        </div>
+      </div>
   </section>
 
-  <object class="loading-logo" id="my-svg" type="image/svg+xml" data="./assets/logo_inverted.svg"></object>
+  <button id="back-to-top"></button>
   
-  <script>
-    const page = "about";
-  </script>
+
+  <div class="loading-overlay">
+    <object
+      class="loading-logo"
+      id="my-svg"
+      type="image/svg+xml"
+      data="./assets/logo_inverted.svg"
+    ></object>
+  </div>
+
   <script src="js/script.js"></script>
-  <script type="module" src="js/main.js"></script>
 </body>
 </html>
