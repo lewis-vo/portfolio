@@ -120,7 +120,7 @@ const removeListener = movementEvaluator(45, (distance, deltaX, deltaY) => {
   //document.body.style.backgroundColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
 });
 */
-
+/*
 if (typeof DeviceOrientationEvent.requestPermission === "function") {
   let click = false;
   document.body.addEventListener("click", () => {
@@ -130,7 +130,7 @@ if (typeof DeviceOrientationEvent.requestPermission === "function") {
     }
   });
 }
-
+*/
 
 
 const shuffleString = (str, replaceChance, replacementChars) => {
@@ -155,7 +155,38 @@ function shuffleTextOnHover() {
   elements.forEach((element) => {
     const originalText = element.textContent;
 
+    const text1 = element.querySelector("h4");
+    const text2 = element.querySelector("p");
+    const originalText1 = (text1) ? text1.textContent : "";
+    const originalText2 = (text2) ? text2.textContent : "";
+
+    const isCutItem = (element.classList.contains("cut-item")) ? true : false;
+
     element.addEventListener("mouseover", () => {
+      if (isCutItem) {
+        let shuffleInterval = setInterval(() => {
+          text1.textContent = shuffleString(
+            originalText1,
+            replaceChance,
+            replacementChars
+          );
+
+          text2.textContent = shuffleString(
+            originalText2,
+            replaceChance,
+            replacementChars
+          );
+        }, shuffleDuration / shuffleCount);
+  
+        setTimeout(() => {
+          clearInterval(shuffleInterval);
+          text1.textContent = originalText1;
+          text2.textContent = originalText2;
+        }, shuffleDuration);
+
+        return;
+      }
+
       let shuffleInterval = setInterval(() => {
         element.textContent = shuffleString(
           originalText,
@@ -219,7 +250,7 @@ function createMoveInEffect() {
       setTimeout(() => {
         element.style.transition = `clip-path ${appearDuration}ms cubic-bezier(0.25, 0.8, 0.25, 1), transform ${appearDuration}ms cubic-bezier(0.25, 0.8, 0.25, 1), opacity ${appearDuration}ms cubic-bezier(0.25, 0.8, 0.25, 1)`;
         element.style.transform = "translate(0, 0)";
-        element.style.clipPath = `inset(0 0 0% 0)`;
+        if (clipped) element.style.clipPath = `inset(0 0 0% 0)`;
         element.style.opacity = "1";
       }, delay * 100 + 250);
     }
@@ -249,6 +280,7 @@ window.addEventListener("load", () => {
         document.body.style.transform = "none";
 
         doneAnim = true;
+        createMoveInEffect();
       });
       createMoveInEffect();
     }, delay);
@@ -301,9 +333,10 @@ window.addEventListener('scroll', function() {
   }
   floatings.forEach(el => {
     const direction = (el.dataset.moveTo) ? el.dataset.moveTo : "none";
+    const shiftRate = (el.dataset.shiftRate) ? el.dataset.shiftRate : "0";
 
-    if (direction === "left") el.style.marginLeft = (scrollY * parseFloat(el.dataset.floatRate)) + 'px';
-    if (direction === "right") el.style.marginRight = (scrollY * parseFloat(el.dataset.floatRate)) + 'px';
+    if (direction === "left") el.style.marginLeft = (scrollY * parseFloat(shiftRate)) + 'px';
+    if (direction === "right") el.style.marginRight = (scrollY * parseFloat(shiftRate)) + 'px';
 
     if (el.dataset.floatTransform === "true") {
       el.style.transform = `translateY(-${scrollY * parseFloat(el.dataset.floatRate)}px)`;

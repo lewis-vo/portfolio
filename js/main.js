@@ -62,16 +62,6 @@ async function loadModel(path) {
   return gltf;
 }
 
-console.log(location.hostname);
-
-function lerp(t, a, b) {
-  return a + (b - a) * t;
-}
-
-function smoothLerp(current, target, speed, deltaTime) {
-  return lerp(current, target, speed * deltaTime);
-}
-
 async function mainHome() {
   let mouseX, mouseY;
   document.body.addEventListener("mousemove", (e) => {
@@ -120,9 +110,6 @@ async function mainHome() {
     requestAnimationFrame(animate);
 
     mixer.update(delta);
-
-    const newRotationY = lerp(percentX, -0.8, -0.2) + ((flip) ? 4 : 0);
-    const newRotationX = lerp(percentY, -0.3, 0.1);
 
     tamagotchi.rotation.x = -0.2;
     tamagotchi.rotation.z = -0.1;

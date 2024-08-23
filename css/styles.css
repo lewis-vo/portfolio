@@ -379,6 +379,12 @@ ul.design-specialty-list {
   font-weight: 350;
 }
 
+h3 {
+  font-weight: 350;
+  font-size: 2.4rem;
+  line-height: 2.6rem;
+}
+
 h4 {
   font-weight: 350;
   font-size: var(--headline);
@@ -564,7 +570,7 @@ canvas {
 }
 
 .appear-entry-loaded canvas {
-  transition-delay: 700ms;
+  transition-delay: 100ms;
   transform: scale(1);
   opacity: 1;
 }
@@ -590,7 +596,7 @@ canvas {
 }
 @media screen and (max-width: 720px) {
   canvas,
-  .appear-entry-loaded .canvas {
+  .appear-entry-loaded canvas {
     bottom: 4%;
     right: -32%;
   }
@@ -598,7 +604,7 @@ canvas {
 
 @media screen and (max-width: 560px) {
   canvas,
-  .appear-entry-loaded .canvas {
+  .appear-entry-loaded canvas {
     right: -70%;
   }
 }
@@ -617,15 +623,18 @@ canvas {
   }
 }
 
+@media (orientation: portrait) {
+  .appear-entry canvas {
+    transform: scale(0.44) translateY(-50%);
+  }
 
-
-@media screen and (max-height: 700px) {
-  canvas {
+  canvas,
+  .appear-entry-loaded canvas {
     bottom: unset;
-    top: -27%;
+    top: 50%;
+    transform: scale(1) translateY(-50%);
   }
 }
-
 
 p {
   margin-bottom: 1em;
@@ -712,6 +721,7 @@ overflow: hidden;
   height: 120vh;
 }
 
+
 .parallax-box h4 {
   position: relative;
   width: 100%;
@@ -724,7 +734,18 @@ overflow: hidden;
   height: max-content;
 }
 
+@media (orientation: portrait) {
+  .parallax-box {
+    height: 110vh;
+  }
+
+  .parallax-box h4 {
+    top: 22vh;
+  }
+}
+
 .parallax-box .floating {
+  display: flex;
   position: absolute;
   width: 28%;
   background-color: var(--color);
@@ -734,17 +755,92 @@ overflow: hidden;
   cursor: pointer;
 }
 
+.floating::before {
+  position: absolute;
+  content: 'Mooncake';
+  bottom: -3.5rem;
+  left: 0;
+  height: 48px;
+  width: 200%;
+  font-size: 0.8rem;
+}
+
+.floating::after {
+  position: absolute;
+  content: 'Artifact Exploration';
+  font-family: 'Roboto Mono', 'Courier New', Courier, monospace !important;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+  letter-spacing: 0;
+  bottom: -4.8rem;
+  left: 0;
+  height: 48px;
+  width: fit-content;
+}
+
+.floating > * {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.floating > img,
+.floating > video {
+  filter: grayscale(1) brightness(0.9) contrast(1.1);
+  transition: 500ms;
+}
+
+.floating:hover {
+  z-index: 100;
+}
+
+.floating:hover > img,
+.floating:hover > video {
+  transform: scale(1.3);
+  filter: none;
+}
+
+
+
+.floating.floating1::before {
+  content: 'Love Poem';
+}
+
+.floating.floating1::after {
+  content: 'Interactive Poetry';
+}
+
+.floating > a {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 10;
+}
+
 .floating.floating1 {
-  width: 20%;
+  width: 27%;
   left: 3%;
   bottom: 23%;
+  aspect-ratio: 16/9;
 }
 .floating.floating2 {
   z-index: 2;
   left: unset;
-  bottom: 2%;
+  bottom: 4%;
   margin: 0 auto;
+  aspect-ratio: 1 / 1;
+  width: 29%;
 }
+
+.floating.floating2::before {
+  content: 'Mangroves';
+}
+
+.floating.floating2::after {
+  content: '3D Posters';
+}
+
 .floating.floating3 {
   right: 2%;
   bottom: 5%;
@@ -767,12 +863,25 @@ overflow: hidden;
   position: absolute;
   top: 0;
   width: 90%;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 1 / 0.9;
   transition: 0.6s;
   overflow: hidden;
   pointer-events: all;
   cursor: pointer;
   filter: grayscale(1) contrast(1.2);
+}
+
+.cut-box > a {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 100%;
+  height: 100%;
+}
+
+.showcase-sublabel {
+  transform: translateY(-180%);
 }
 
 .cut-box:hover {
@@ -857,6 +966,8 @@ overflow: hidden;
   list-style: none;
   padding: 0;
   text-transform: uppercase;
+  margin: 4rem 0;
+  margin-top: 0.8rem;
 }
 .contact {
   height: 72px;
@@ -866,6 +977,7 @@ overflow: hidden;
   box-shadow: inset 0 -1px 0 var(--color);
   font-weight: 400;
 }
+.contact:last-of-type {}
 .contact:hover {}
 
 .contact a {
@@ -879,4 +991,55 @@ overflow: hidden;
 .header-gif {
   width: 100%;
   filter: grayscale(1) brightness(1.1) contrast(1.2);
+}
+
+.has-bottomspace {
+  margin-bottom: 6rem !important;
+}
+
+.badge-info {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  gap: 4px;
+  margin: 5rem 0;
+}
+
+.badge-info > * {
+  aspect-ratio: 1/1;
+}
+
+.badge-info > * > img {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1/1;
+}
+
+.badge-float {
+  position: absolute;
+  width: 8vw;
+  aspect-ratio: 1/1;
+  top: 0;
+  z-index: 10;
+}
+
+.badge-float1 {
+  top: 101vh;
+  left: 1%;
+}
+
+.badge-float2 {
+  top: 126vh;
+  right: 6%;
+}
+
+.badge-float3 {
+  top: 190vh;
+  left: 35%;
+}
+
+.badge-float4 {
+  
+  top: 176vh;
+  right: 30%;
 }
