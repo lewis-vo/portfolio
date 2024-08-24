@@ -1,150 +1,25 @@
-// FETCH AND RANDOMIZE ELEMENTS ON THE PAGE BASED ON MOUSE/DEVICE MOVEMENT
-
-if ('scrollRestoration' in history) {
-  history.scrollRestoration = 'manual';
+// Reset scroll position
+if ("scrollRestoration" in history) {
+  history.scrollRestoration = "manual";
 }
 
-window.onload = () => {
+window.addEventListener("load", () => {
   document.body.scrollTop = 0;
   window.scrollTo(0, 0);
-};
-
-const randomGroupLabels = [
-  "backdrop-books",
-  "logos",
-  "bottoms-back",
-  "tops-back",
-  "shoesR-front",
-  "shoesL-front",
-  "shoesR-back",
-  "shoesL-back",
-  "bottoms-front",
-  "tops-front",
-  "heads",
-  "boards-1",
-  "boards-2",
-];
-
-const randomGroups = randomGroupLabels.map(label => getRandomGroup(label));
-
-function getRandomGroup(label) {
-  const elements = [...document.querySelectorAll(`[data-homepage-random-group="${label}"]`)];
-  function tick() {
-    let randomIndex = Math.floor(Math.random() * elements.length);
-    elements.forEach((element, index) => {
-      if (index === randomIndex) {
-        elements[index].classList.remove("vitruvian-hidden");
-        elements[index].classList.add("vitruvian-show");
-        return;
-      }
-      elements[index].classList.add("vitruvian-hidden");
-      elements[index].classList.remove("vitruvian-show");
-    });
-  }
-
-  tick();
-
-  return {
-    tick: tick,
-    elements: elements,
-    label: label
-  };
-}
-
-function movementEvaluator(tolerance, callback) {
-  let startX, startY;
-  let currentX, currentY;
-
-  function handleMouseMove(event) {
-    currentX = event.clientX;
-    currentY = event.clientY;
-
-    if (startX === undefined || startY === undefined) {
-      startX = currentX;
-      startY = currentY;
-      return;
-    }
-
-    const deltaX = Math.abs(currentX - startX);
-    const deltaY = Math.abs(currentY - startY);
-    const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-
-    if (distance >= tolerance) {
-      callback(distance, deltaX, deltaY);
-      startX = undefined;
-      startY = undefined;
-    }
-  }
-
-  function handleDeviceMotion(event) {
-    const rotationRate = event;
-    if (!rotationRate) return; // Some devices might not support rotationRate
-
-    currentX = rotationRate.alpha || 0;
-    currentY = rotationRate.beta || 0;
-
-    if (startX === undefined || startY === undefined) {
-      startX = currentX;
-      startY = currentY;
-      return;
-    }
-
-    const deltaX = Math.abs(currentX - startX);
-    const deltaY = Math.abs(currentY - startY);
-    const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-
-    if (distance >= tolerance / 4) {
-      callback(distance, deltaX, deltaY);
-      startX = undefined;
-      startY = undefined;
-    }
-  }
-  window.addEventListener("deviceorientation", handleDeviceMotion);
-  window.addEventListener("mousemove", handleMouseMove);
-
-  return () => {
-    window.removeEventListener("devicemotion", handleDeviceMotion);
-    window.removeEventListener("mousemove", handleMouseMove);
-  };
-}
-/*
-const removeListener = movementEvaluator(45, (distance, deltaX, deltaY) => {
-  randomGroups.forEach(group => {
-    if (group.label===randomGroupLabels[0]) {
-      if (Math.random() >= 0.4) group.tick();
-      return;
-    }
-    if (Math.random() >= 0.66) group.tick();
-  });
-  //console.log("Moved", distance, "units:", deltaX, "x", deltaY, "y");
-  //document.body.style.backgroundColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
 });
-*/
-/*
-if (typeof DeviceOrientationEvent.requestPermission === "function") {
-  let click = false;
-  document.body.addEventListener("click", () => {
-    if (!click) {
-      DeviceOrientationEvent.requestPermission();
-      click = true;
-    }
-  });
-}
-*/
 
-
+// Create a glitching text on hovering clickable elements
 const shuffleString = (str, replaceChance, replacementChars) => {
   return str
     .split("")
     .map((char) => {
-      return Math.random() < replaceChance
+      return Math.random() < replaceChance // Only replace the text if the random value goes over the specified threshold
         ? replacementChars[Math.floor(Math.random() * replacementChars.length)]
         : char;
     })
     .sort(() => Math.random() - 0.5)
     .join("");
 };
-
 function shuffleTextOnHover() {
   const elements = document.querySelectorAll("[data-shuffle-on-hover]");
   const shuffleDuration = 300; // Duration of shuffling in milliseconds
@@ -153,16 +28,18 @@ function shuffleTextOnHover() {
   const replacementChars = "_#!?$&";
 
   elements.forEach((element) => {
+    // Store the original text so that it is not lost
     const originalText = element.textContent;
 
+    // Special value only needed for the showcase text and value
     const text1 = element.querySelector("h4");
     const text2 = element.querySelector("p");
-    const originalText1 = (text1) ? text1.textContent : "";
-    const originalText2 = (text2) ? text2.textContent : "";
+    const originalText1 = text1 ? text1.textContent : "";
+    const originalText2 = text2 ? text2.textContent : "";
 
-    const isCutItem = (element.classList.contains("cut-item")) ? true : false;
+    const isCutItem = element.classList.contains("cut-item") ? true : false;
 
-    element.addEventListener("mouseover", () => {
+    const shuffle = () => {
       if (isCutItem) {
         let shuffleInterval = setInterval(() => {
           text1.textContent = shuffleString(
@@ -177,7 +54,7 @@ function shuffleTextOnHover() {
             replacementChars
           );
         }, shuffleDuration / shuffleCount);
-  
+
         setTimeout(() => {
           clearInterval(shuffleInterval);
           text1.textContent = originalText1;
@@ -199,13 +76,15 @@ function shuffleTextOnHover() {
         clearInterval(shuffleInterval);
         element.textContent = originalText;
       }, shuffleDuration);
-    });
+    };
+
+    element.addEventListener("mouseover", shuffle);
   });
 }
+
 shuffleTextOnHover();
 
-
-
+// Using a global animation value to reunite all the appear-in transition
 const appearDuration = 1100;
 
 function checkIfElementInViewport(element) {
@@ -218,20 +97,21 @@ function checkIfElementInViewport(element) {
   );
 }
 
+const elements = document.querySelectorAll("[data-appear]");
 function createMoveInEffect() {
-  const elements = document.querySelectorAll("[data-appear]");
-
   elements.forEach((element) => {
     if (element.dataset.animated) return;
     const clipped = element.dataset.appearClipped === "true";
     const forceOnLoad = element.dataset.appearOnLoad === "true";
     if (clipped) {
+      // Set clip path, this will make the element move up behind somthing, adding variety to the system
       element.style.clipPath = `inset(0 0 100% 0)`;
     } else {
       element.style.opacity = "0";
     }
     if (checkIfElementInViewport(element) || forceOnLoad === true) {
       element.dataset.animated = true;
+      // Make the default is moving from the bottom up
       element.style.transform =
         "translate(" +
         (element.dataset.appear === "from-left"
@@ -248,38 +128,36 @@ function createMoveInEffect() {
         : 0;
 
       setTimeout(() => {
+        // Reset the position, thus making the illusion of something appearing in
         element.style.transition = `clip-path ${appearDuration}ms cubic-bezier(0.25, 0.8, 0.25, 1), transform ${appearDuration}ms cubic-bezier(0.25, 0.8, 0.25, 1), opacity ${appearDuration}ms cubic-bezier(0.25, 0.8, 0.25, 1)`;
         element.style.transform = "translate(0, 0)";
         if (clipped) element.style.clipPath = `inset(0 0 0% 0)`;
         element.style.opacity = "1";
       }, delay * 100 + 250);
-    }
-  });
-}
-function updateAppearElements() {
-  const elements = document.querySelectorAll("[data-appear]");
-  elements.forEach((element) => {
-    if (checkIfElementInViewport(element)) {
-      createMoveInEffect(element);
+      // The delay value is an integer so it is multiplied to give the final value in milisecond
     }
   });
 }
 
+// Handle the wipe in transition of the screen
 window.addEventListener("load", () => {
   if (document.body.classList.contains("appear-entry")) {
-    let doneAnim = false;
+    // Use this value to make sure the transition check happens only once
+    let doneEntryAnim = false;
     window.scrollTo(0, 0);
     let delay = parseInt(document.body.dataset.appearEntryDuration);
+
     setTimeout(() => {
       document.body.classList.add("appear-entry-loaded");
-      document.body.addEventListener('transitionend', function(event) {
+      document.body.addEventListener("transitionend", function (event) {
         if (event.target !== document.body) return;
-        if (doneAnim) return;
+        if (doneEntryAnim) return;
 
+        // Enable scrolling when finishing animation
         document.body.style.overflowY = "auto";
         document.body.style.transform = "none";
 
-        doneAnim = true;
+        doneEntryAnim = true;
         createMoveInEffect();
       });
       createMoveInEffect();
@@ -288,9 +166,10 @@ window.addEventListener("load", () => {
     createMoveInEffect();
   }
 });
-window.addEventListener("scroll", updateAppearElements);
-window.addEventListener("resize", updateAppearElements);
+window.addEventListener("scroll", createMoveInEffect);
+window.addEventListener("resize", createMoveInEffect);
 
+// Handling the auto sizing of vertical text
 const titleColumn = document.getElementById("title-column");
 const titleContainer = titleColumn.querySelector(".big-title-container");
 
@@ -298,14 +177,14 @@ function styleTitle() {
   let width = titleColumn.offsetWidth;
   titleContainer.style.height = width + "px";
 }
-
 styleTitle();
 window.addEventListener("resize", styleTitle);
 
+// Handling special transition between different pages within the site
 let navigationLinks = [...document.querySelectorAll("[data-animated-href]")];
 
-navigationLinks.forEach(el => {
-  el.addEventListener("click", () => {
+navigationLinks.forEach((el) => {
+  el.addEventListener("click", (e) => {
     window.scrollTo({
       top: 0,
       left: 0,
@@ -314,50 +193,53 @@ navigationLinks.forEach(el => {
     document.body.style.transform = "";
     document.body.style.overflow = "hidden";
     document.body.classList.remove("appear-entry-loaded");
-    document.body.addEventListener('transitionend', function(event) {
+    document.body.addEventListener("transitionend", function (event) {
       if (event.target !== document.body) return;
       window.location.href = el.dataset.animatedHref;
     });
   });
 });
 
-
-const spinningFan = document.getElementById("spinning-fan");
-const floatings = [...document.querySelectorAll(".stall")];
+const stallElements = [...document.querySelectorAll(".stall")];
 const backToTop = document.getElementById("back-to-top");
 
-window.addEventListener('scroll', function() {
+window.addEventListener("scroll", function () {
   const scrollY = window.scrollY;
   if (!document.body.classList.contains("appear-entry-loaded")) {
     window.scrollY = 0;
   }
-  floatings.forEach(el => {
-    const direction = (el.dataset.moveTo) ? el.dataset.moveTo : "none";
-    const shiftRate = (el.dataset.shiftRate) ? el.dataset.shiftRate : "0";
+  stallElements.forEach((el) => {
+    const direction = el.dataset.moveTo ? el.dataset.moveTo : "none";
+    const shiftRate = el.dataset.shiftRate ? el.dataset.shiftRate : "0";
 
-    if (direction === "left") el.style.marginLeft = (scrollY * parseFloat(shiftRate)) + 'px';
-    if (direction === "right") el.style.marginRight = (scrollY * parseFloat(shiftRate)) + 'px';
+    if (direction === "left")
+      el.style.marginLeft = scrollY * parseFloat(shiftRate) + "px";
+    if (direction === "right")
+      el.style.marginRight = scrollY * parseFloat(shiftRate) + "px";
 
     if (el.dataset.floatTransform === "true") {
-      el.style.transform = `translateY(-${scrollY * parseFloat(el.dataset.floatRate)}px)`;
+      el.style.transform = `translateY(-${
+        scrollY * parseFloat(el.dataset.floatRate)
+      }px)`;
     } else {
-      el.style.marginBottom = scrollY * parseFloat(el.dataset.floatRate) + 'px';
+      el.style.marginBottom = scrollY * parseFloat(el.dataset.floatRate) + "px";
     }
   });
-  if (spinningFan) spinningFan.style.setProperty('--rotation', scrollY/4 + 'deg');
+
   if (backToTop) {
     if (scrollY > 410) {
       backToTop.classList.add("appeared");
     } else {
       backToTop.classList.remove("appeared");
     }
-  } 
+  }
 });
 
-if (backToTop) backToTop.addEventListener("click", () => {
-  window.scrollTo({
-    top: 0,
-    left: 0,
-    behavior: "smooth",
+if (backToTop)
+  backToTop.addEventListener("click", () => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
   });
-});
