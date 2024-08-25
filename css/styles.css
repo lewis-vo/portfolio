@@ -22,6 +22,10 @@
   background-color: var(--backdrop);
 }
 
+video::-webkit-media-controls-start-playback-button {
+  display: none;
+}
+
 h1,
 h2,
 h3,
