@@ -17,15 +17,6 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="css/styles.css" />
-    <script type="importmap">
-      {
-        "imports": {
-          "three": "https://cdn.jsdelivr.net/npm/three@v0.167.1/build/three.module.js",
-          "@tweenjs": "https://cdnjs.cloudflare.com/ajax/libs/tween.js/25.0.0/tween.esm.min.js",
-          "three/addons/": "https://cdn.jsdelivr.net/npm/three@v0.167.1/examples/jsm/"
-        }
-      }
-    </script>
   </head>
   <body class="appear-entry home" data-appear-entry-duration="400">
     <main class="homepage-main-section">
@@ -189,7 +180,10 @@
       ></object>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.139.0/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.139.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.139.0/examples/js/loaders/RGBELoader.js"></script>
     <script src="js/script.js"></script>
-    <script type="module" src="js/index.js"></script>
+    <script src="js/index.js"></script>
   </body>
 </html>

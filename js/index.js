@@ -1,6 +1,4 @@
-import * as THREE from "three";
-import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
-import { RGBELoader } from "three/addons/loaders/RGBELoader.js";
+
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(50, 600 / 700, 0.1, 1000);
@@ -32,7 +30,7 @@ renderer.setSize(900, 1000);
 document.body.appendChild(renderer.domElement);
 
 // Load Enviromental Map
-const rgbeLoader = new RGBELoader();
+const rgbeLoader = new THREE.RGBELoader();
 rgbeLoader.load(
   baseURL + "assets/3d/textures/environment.hdr",
   function (texture) {
@@ -45,7 +43,7 @@ rgbeLoader.load(
 
 // Use async to avoid null, undefined 3d model variable
 async function loadModel(path) {
-  const loader = new GLTFLoader();
+  const loader = new THREE.GLTFLoader();
   const gltf = await loader.loadAsync(path);
   return gltf;
 }
