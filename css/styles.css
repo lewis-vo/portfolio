@@ -265,7 +265,6 @@ span.monospaced {
   position: sticky;
   top: var(--page-padding);
   height: calc(100dvh - var(--page-padding) * 2);
-  min-height: 480px;
 }
 
 .homepage-main-section #title-column {
@@ -380,6 +379,18 @@ h4 {
   gap: 0.5rem;
   pointer-events: none;
   max-height: 430px;
+}
+
+@media screen and (max-height: 700px) and (min-width: 721px) {
+  .big-title-container {
+    max-height: 300px;
+  }
+}
+
+@media screen and (max-height: 600px) and (min-width: 721px) {
+  .big-title-container {
+    max-height: 256px;
+  }
 }
 
 .big-title-container .title-line {
