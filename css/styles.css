@@ -164,7 +164,7 @@ p {
 .homepage-main-section {
   position: relative;
   width: 100dvw;
-  height: 100vh;
+  height: 100dvh;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
