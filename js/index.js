@@ -4,6 +4,8 @@ import { RGBELoader } from "three/addons/loaders/RGBELoader.js";
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(50, 600 / 700, 0.1, 1000);
+let baseURL = "../";
+if (location.hostname === "lewis-vo.github.io") baseURL = "https://lewis-vo.github.io/portfolio/";
 camera.position.set(0, 0.22, 0.9);
 camera.rotation.z = Math.PI * 0.06;
 
@@ -19,7 +21,6 @@ const pointLight3 = new THREE.PointLight(0xffffff, 0.009, 0);
 pointLight3.position.set(0, 0.2, 0.3);
 scene.add(pointLight3);
 
-
 const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
 renderer.outputEncoding = THREE.sRGBEncoding;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -30,9 +31,10 @@ renderer.setSize(900, 1000);
 
 document.body.appendChild(renderer.domElement);
 
+// Load Enviromental Map
 const rgbeLoader = new RGBELoader();
 rgbeLoader.load(
-  "https://lewis-vo.github.io/portfolio/assets/3d/textures/environment.hdr",
+  baseURL + "assets/3d/textures/environment.hdr",
   function (texture) {
     texture.mapping = THREE.EquirectangularReflectionMapping;
     scene.environment = texture;
@@ -41,12 +43,14 @@ rgbeLoader.load(
   }
 );
 
+// Use async to avoid null, undefined 3d model variable
 async function loadModel(path) {
   const loader = new GLTFLoader();
   const gltf = await loader.loadAsync(path);
   return gltf;
 }
 
+// Load Tamagotchi
 async function mainHome() {
   let mouseX, mouseY;
   document.body.addEventListener("mousemove", (e) => {
@@ -57,19 +61,19 @@ async function mainHome() {
   //https://lewis-vo.github.io/portfolio/assets/3d/tamagotchi.glb
   //https://lewis-vo.github.io/portfolio/assets/3d/tamagotchi2.glb
   const tamagotchiGLTF = await loadModel(
-    "https://lewis-vo.github.io/portfolio/assets/3d/tamagotchi2.glb"
+    baseURL + "assets/3d/tamagotchi2.glb"
   );
   const tamagotchi = tamagotchiGLTF.scene;
-
-  let flip = false;
 
   const animations = tamagotchiGLTF.animations;
   const mixer = new THREE.AnimationMixer(tamagotchi);
 
   const clock = new THREE.Clock();
 
+  // Loop through all available animations found in the file and play it
   animations.forEach((anim) => {
     const action = mixer.clipAction(anim);
+    // Adjust the speed of the anim
     action.timeScale = 0.8;
     action.play();
   });
@@ -82,7 +86,7 @@ async function mainHome() {
   const frequency = 1;
 
   function animate() {
-    let delta = clock.getDelta();
+    let delta = clock.getDelta(); // Use the clock to get framerate independant result;
     time += delta;
     requestAnimationFrame(animate);
 
@@ -90,7 +94,7 @@ async function mainHome() {
 
     tamagotchi.rotation.x = -0.2;
     tamagotchi.rotation.z = -0.1;
-    tamagotchi.rotation.y = -0.65 + (flip ? 4.6 : 0);
+    tamagotchi.rotation.y = -0.65;
 
     // The sine wave is cyclical so it loops perfectly
     tamagotchi.position.y = amplitude * Math.sin(time * frequency);

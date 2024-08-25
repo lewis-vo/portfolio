@@ -139,6 +139,17 @@ function createMoveInEffect() {
   });
 }
 
+// Handling the auto sizing of vertical text
+const titleColumn = document.getElementById("title-column");
+const titleContainer = titleColumn.querySelector(".big-title-container");
+
+function styleTitle() {
+  let width = titleColumn.offsetWidth;
+  titleContainer.style.height = width + "px";
+}
+styleTitle();
+window.addEventListener("resize", styleTitle);
+
 // Handle the wipe in transition of the screen
 window.addEventListener("load", () => {
   if (document.body.classList.contains("appear-entry")) {
@@ -169,17 +180,6 @@ window.addEventListener("load", () => {
 window.addEventListener("scroll", createMoveInEffect);
 window.addEventListener("resize", createMoveInEffect);
 
-// Handling the auto sizing of vertical text
-const titleColumn = document.getElementById("title-column");
-const titleContainer = titleColumn.querySelector(".big-title-container");
-
-function styleTitle() {
-  let width = titleColumn.offsetWidth;
-  titleContainer.style.height = width + "px";
-}
-styleTitle();
-window.addEventListener("resize", styleTitle);
-
 // Handling special transition between different pages within the site
 let navigationLinks = [...document.querySelectorAll("[data-animated-href]")];
 
@@ -200,6 +200,7 @@ navigationLinks.forEach((el) => {
   });
 });
 
+// Handling parallax effect
 const stallElements = [...document.querySelectorAll(".stall")];
 const backToTop = document.getElementById("back-to-top");
 
