@@ -1057,3 +1057,9 @@ p {
   top: 176vh;
   right: 30%;
 }
+
+@media screen and (max-width: 720px) {
+  .showcase-tile > img.stall {
+    transform: none !important;
+  }
+}

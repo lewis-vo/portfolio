@@ -89,11 +89,13 @@ const appearDuration = 1100;
 
 function checkIfElementInViewport(element) {
   const boundingRect = element.getBoundingClientRect();
+  
+  if (element.classList.contains("cut-item")) {
+    console.log( boundingRect.top );
+  }
+
   return (
-    boundingRect.top >= 0 &&
-    boundingRect.left >= 0 &&
-    boundingRect.bottom <= window.innerHeight &&
-    boundingRect.right <= window.innerWidth
+    boundingRect.top <= (window.innerHeight - window.innerHeight*0.14)
   );
 }
 
